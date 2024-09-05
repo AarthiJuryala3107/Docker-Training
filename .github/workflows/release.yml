@@ -1,0 +1,23 @@
+name: Release
+on:
+  push:
+    tags:
+      - "*"
+    
+jobs:
+  build_and_publish_image:
+    runs-on: ubuntu-latest
+    name: Build Image and Push
+    steps: 
+      - uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: docker login -u aarthi31 -p ${{secrets.DOCKER_PASSWORD}}
+
+      - name: Build Image
+        run: |-
+          docker build . --file Dockerfile -t aarthi31/docker-sample-repo:${{github.ref_name}}
+
+      - name: Push Image to GCR
+        run: |-
+          docker push aarthi31/docker-sample-repo:{{github.ref_name}}

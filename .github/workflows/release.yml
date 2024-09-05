@@ -16,7 +16,7 @@ jobs:
 
       - name: Build Image
         run: |-
-          docker build . --file Dockerfile -t aarthi31/docker-sample-repo:${{github.ref_name}}
+          docker build . --file Dockerfile -t aarthi31/docker-sample-repo:${{ github.ref_name }}
 
       - name: Push Image to GCR
         run: |-

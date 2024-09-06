@@ -15,9 +15,9 @@ jobs:
         run: docker login -u aarthi31 -p ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build Image
-        run: |-
+        run: |
           docker build . --file Dockerfile -t aarthi31/docker-sample-repo:${{ github.ref_name }}
 
       - name: Push Image to GCR
-        run: |-
+        run: |
           docker push aarthi31/docker-sample-repo:{{github.ref_name}}
